@@ -1,0 +1,70 @@
+import React, { useState } from "react";
+import "./App.css"; // for styling
+
+const App = () => {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const products = [
+    {
+      id: 1,
+      name: "KL University Hoodie",
+      price: "₹799",
+      shortDesc: "Comfortable cotton hoodie with KLU logo",
+      image: "https://via.placeholder.com/200",
+      fullDesc:
+        "This hoodie is made from soft, durable cotton with an embroidered KL University logo. Perfect for casual wear or campus events."
+    },
+    {
+      id: 2,
+      name: "KLU Notebook",
+      price: "₹199",
+      shortDesc: "A5 spiral notebook with KLU branding",
+      image: "https://via.placeholder.com/200",
+      fullDesc:
+        "A premium quality notebook with 200 ruled pages and a sturdy cover featuring the KLU emblem."
+    },
+    {
+      id: 3,
+      name: "KLU Water Bottle",
+      price: "₹299",
+      shortDesc: "Reusable bottle with university logo",
+      image: "https://via.placeholder.com/200",
+      fullDesc:
+        "Stay hydrated with this eco-friendly stainless steel bottle featuring the KL University logo. Keeps drinks cold or hot for hours."
+    }
+  ];
+
+  return (
+    <div className="store-container">
+      <h1>KL University Online Store</h1>
+      <div className="product-list">
+        {products.map((product) => (
+          <div
+            key={product.id}
+            className="product-card"
+            onClick={() => setSelectedProduct(product)}
+          >
+            <h3>{product.name}</h3>
+            <p>{product.price}</p>
+            <p>{product.shortDesc}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Pop-up Modal */}
+      {selectedProduct && (
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <img src={selectedProduct.image} alt={selectedProduct.name} />
+            <h2>{selectedProduct.name}</h2>
+            <p><strong>Price:</strong> {selectedProduct.price}</p>
+            <p>{selectedProduct.fullDesc}</p>
+            <button onClick={() => setSelectedProduct(null)}>Close</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
